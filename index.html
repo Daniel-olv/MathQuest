@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MathQuest — Desafie seu Cérebro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <canvas id="starfield"></canvas>
+
+  <div class="flash-screen" id="flash"></div>
+
+  <div class="app">
+    <div class="card">
+
+      <div class="screen active" id="welcome">
+        <div class="welcome-logo-wrap">
+          <img src="logo.png" alt="MathQuest Logo" class="logo-img">
+          <h1 class="welcome-title">Bem-vindo ao MathQuest!</h1>
+        </div>
+
+        <button class="btn-start-journey" onclick="showPhaseSelection()">Iniciar Jornada 🚀</button>
+
+        <div class="credits-box">
+          <div class="credits-title">Desenvolvido por:</div>
+          <div class="credits-names">
+            <span> Jennifer</span>
+            <span> Vivian</span>
+            <span> Yasmin</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="screen" id="home" style="display:none;">
+        <div class="logo-wrap">
+          <button class="welcome-back-btn" onclick="showWelcome()" title="Ver Créditos">ℹ️ Créditos</button>
+          <img src="logo.png" alt="MathQuest Logo" class="logo-img-small">
+          <div class="tagline">Desafie seu Cérebro</div>
+        </div>
+
+        <div class="phase-title">Escolha sua fase</div>
+        <div class="phase-grid">
+
+          <div class="phase-card easy" onclick="startGame('easy')">
+            <div class="phase-num">Fase 1</div>
+            <span class="phase-emoji">🟢</span>
+            <div class="phase-name">Fácil</div>
+            <div class="phase-topics">Adição · Subtração<br>Multiplicação · Divisão</div>
+          </div>
+
+          <div class="phase-card medium" onclick="startGame('medium')">
+            <div class="phase-num">Fase 2</div>
+            <span class="phase-emoji">🔵</span>
+            <div class="phase-name">Médio</div>
+            <div class="phase-topics">Frações · Porcentagem<br>Problemas matemáticos</div>
+          </div>
+
+          <div class="phase-card hard" onclick="startGame('hard')">
+            <div class="phase-num">Fase 3</div>
+            <span class="phase-emoji">🟣</span>
+            <div class="phase-name">Difícil</div>
+            <div class="phase-topics">Equações · Geometria<br>Matemática financeira</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="screen" id="game" style="display:none; flex-direction:column;">
+
+        <div class="game-header">
+          <div class="header-left">
+            <button class="back-btn" onclick="showHome()" title="Voltar">←</button>
+            <span class="phase-badge-header" id="phase-badge">Fase 1 — Fácil</span>
+          </div>
+          <div class="score-chip">
+            <span class="score-icon">⭐</span>
+            <span class="score-val" id="score-val">0</span>
+            <span class="score-pts">pts</span>
+          </div>
+        </div>
+
+        <div class="progress-track">
+          <div class="progress-fill" id="prog" style="width:0%"></div>
+        </div>
+
+        <div class="game-body" id="game-body">
+          <div class="q-counter" id="q-counter">PERGUNTA 1 DE 5</div>
+
+          <div class="question-card" id="q-card">
+            <div class="question-text" id="q-text">...</div>
+          </div>
+
+          <div class="opts" id="opts"></div>
+
+          <div class="feedback" id="feedback"></div>
+
+          <div class="next-wrap" id="next-wrap">
+            <button class="btn-next" id="btn-next" onclick="nextQ()">Próxima questão →</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="screen" id="result" style="display:none;">
+
+        <div class="result-phase-label" id="r-phase">Fase 1 — Fácil</div>
+        <div class="result-stars" id="r-stars">⭐⭐⭐</div>
+        <div class="result-title" id="r-title">Incrível!</div>
+        <div class="result-subtitle" id="r-sub">Você mandou muito bem!</div>
+
+        <div class="big-score-wrap">
+          <div class="big-score" id="r-score">0</div>
+          <div class="big-score-label">pontos conquistados</div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-pill green">
+            <span class="val" id="r-correct">0</span>
+            <span class="lbl">✅ Acertos</span>
+          </div>
+          <div class="stat-pill red">
+            <span class="val" id="r-wrong">0</span>
+            <span class="lbl">❌ Erros</span>
+          </div>
+        </div>
+
+        <div class="result-btns">
+          <button class="btn-home" onclick="showHome()">🏠 Início</button>
+          <button class="btn-restart" onclick="restartGame()">🔄 Jogar de novo</button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
